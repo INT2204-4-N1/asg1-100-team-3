@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GoogleTranslateController">
+   <children>
+      <TextArea fx:id="inputText" layoutX="58.0" layoutY="185.0" onKeyPressed="#pressKeyBoard" prefHeight="123.0" prefWidth="312.0" />
+      <TextArea fx:id="outputText" layoutX="436.0" layoutY="186.0" prefHeight="123.0" prefWidth="312.0" />
+      <Button fx:id="tranButton" layoutX="158.0" layoutY="379.0" mnemonicParsing="false" onAction="#pressButton" prefHeight="25.0" prefWidth="99.0" text="Dịch" />
+      <Button fx:id="closeButton" layoutX="547.0" layoutY="379.0" mnemonicParsing="false" onAction="#createDictionaryLayout" prefHeight="25.0" prefWidth="99.0" text="Đóng" />
+      <ComboBox fx:id="srcLang" layoutX="139.0" layoutY="136.0" prefWidth="150.0" promptText="Nguồn" />
+      <ComboBox fx:id="desLang" layoutX="517.0" layoutY="136.0" prefWidth="150.0" promptText="Đích" />
+      <ImageView fitHeight="106.0" fitWidth="200.0" layoutX="54.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/googletran.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="speakButton" layoutX="374.0" layoutY="379.0" mnemonicParsing="false" onAction="#pressButton" prefHeight="25.0" prefWidth="67.0" text="Âm Thanh" />
+   </children>
+</AnchorPane>
