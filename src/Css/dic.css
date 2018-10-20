@@ -1,0 +1,157 @@
+#myAnchorPanel{
+    -fx-background-color:#fff;
+    -fx-font-family: monospace;
+    -fx-font-weight: bold;
+    -fx-fill: #fff;
+}
+#myHBox{
+    -fx-background-color: none;
+}
+#myVBox{
+    -fx-background-radius: 5 0 0 0;
+    -fx-background-color: #039BE5;
+}
+#historyButton{
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 20px;
+    -fx-background-color: #039BE5;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+}
+#buttonWiki{
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 20px;
+    -fx-background-color: #039BE5;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+}
+#buttonGoogle{
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 15px;
+    -fx-background-color: #039BE5;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+}
+#buttonDic{
+    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #039BE5 ;
+    -fx-font-size: 20px;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+#historyButton:hover{
+    -fx-background-color: #00FF00;
+    -fx-text-fill: blue;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#buttonWiki:hover{
+    -fx-background-color:  #00FF00;
+    -fx-text-fill: blue;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#buttonGoogle:hover{
+
+    -fx-background-color:  #00FF00;
+    -fx-text-fill: blue;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#searchTextField{
+    -fx-background-radius: 40px;
+}
+#button1{
+    -fx-background-color: none;
+    -fx-background-radius: 40px;
+}
+#button1:hover{
+    -fx-fill: #fff;
+    -fx-background-color: #E0FFFF;
+    -fx-border-color: #E0FFFF;
+}
+#buttonDelete, #buttonAdd,#buttonSpeaker,#editButton{
+    -fx-background-color: none;
+}
+#buttonDelete:hover{
+    -fx-background-color: 	#E0FFFF;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#buttonAdd:hover{
+    -fx-background-color: 	#EEE8AA;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#editButton:hover{
+    -fx-background-color: 	#FFB6C1;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#buttonSpeaker:hover{
+    -fx-background-color: 	#ADFF2F;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#myListView1{
+    -fx-background-color: none;
+    -fx-font-family: "TUV";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+/*google tran css*/
+#ggAnchorPanel{
+    -fx-background-color: #F0E68C;
+}
+#tranButton{
+    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #039BE5 ;
+    -fx-font-size: 15px;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+#tranButton:hover{
+    -fx-background-color: #fff;
+    -fx-text-fill: blue;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#speakButton{
+    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #00FA9A ;
+    -fx-font-size: 15px;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+#speakButton:hover{
+    -fx-background-color: #fff;
+    -fx-text-fill: blue;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#inputText{
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #20B2AA;
+}
+#outputText{
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill:  #F08080;
+}
+#srcLang{
+    -fx-background-color: #20B2AA;
+}
+#desLang{
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: blue;
+}
+#closeButton{
+    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #FA8072;
+    -fx-font-size: 15px;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+#closeButton:hover{
+    -fx-background-color: #fff;
+    -fx-text-fill: blue;
+    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
