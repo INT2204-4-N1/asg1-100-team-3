@@ -14,7 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -27,6 +29,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javazoom.jl.decoder.JavaLayerException;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -37,18 +40,12 @@ public class Controller implements Initializable {
     ObservableList<String> items = FXCollections.observableArrayList();
     FilteredList<String> filteredData = new FilteredList<>(items, e -> true);
     private static Dictionary myDictionary = new Dictionary();
-    @FXML private ImageView imageSearch = new ImageView();
-    @FXML private ImageView imageSpeaker = new ImageView();
-    @FXML private ImageView imageGoogle = new ImageView();
-    @FXML private ImageView imageDelete = new ImageView();
-    @FXML private ImageView imageAdd = new ImageView();
-    @FXML private ImageView imageHistory = new ImageView();
-    @FXML private ImageView imageEdit = new ImageView();
-    @FXML private ImageView imageDictionary = new ImageView();
+    @FXML private Button buttonDic = new Button();
     @FXML private AnchorPane myAnchorPanel = new AnchorPane();
-    @FXML private ImageView imageWiki = new ImageView();
+    @FXML private ImageView imageDic = new ImageView();
+    @FXML private HBox myHBox = new HBox();
+    @FXML private VBox myVBox = new VBox();
     @FXML private ListView<String> myListView1 = new ListView<>();
-    @FXML private Label myLabel1 = new Label();
     @FXML private WebView displayDefination = new WebView();
     @FXML private Button button1 = new Button();
     @FXML private TextField searchTextField = new TextField();
@@ -57,7 +54,6 @@ public class Controller implements Initializable {
     @FXML private Button buttonWiki = new Button();
     @FXML private Button buttonAdd = new Button();
     @FXML private Button buttonSpeaker = new Button();
-    @FXML private Label myLabel2 = new Label();
     @FXML private Button historyButton= new Button();
     @FXML private Button editButton = new Button();
     @FXML private ListView<String> historyListView = new ListView<String>();
@@ -84,6 +80,12 @@ public class Controller implements Initializable {
             catch (Exception ev){
                 ev.printStackTrace();
             }
+        }
+        else if(e.getSource()==buttonGoogle){
+            createGoogleTranslateLayout();
+        }
+        else if(e.getSource()==historyButton){
+            historySearchWord();
         }
     }
     public void pressKeybroad(){
@@ -113,7 +115,6 @@ public class Controller implements Initializable {
         getSelectingWordOnListView();
         items.addAll(myDictionary.getListWordsFormDictionary());
         suggestionWord();
-        createLayoutMain();
         pressKeybroad();
         pressKeyBroadListView();
         getSelectedWord();
@@ -188,69 +189,22 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    public void createLayoutMain(){
-        myAnchorPanel.setStyle("-fx-background-color:#E0FFFF;-fx-font-family:monospace;-fx-font-size:16px;-fx-font-weight:bold");
-        /**
-         * Load Image Form File
-         */
-        Image ImageSearch = new Image("image/search1.png");
-        Image ImageDictionary = new Image("image/DictionaryImage.png");
-        Image Edit = new Image("image/pencil.png");
-        Image ImageDelete = new Image("image/close-window.png");
-        Image ImageAdd = new Image("image/add.png");
-        Image googleTran = new Image("image/google_translate.png");
-        Image ImageHistory = new Image("image/history1.png");
-        Image Speaker = new Image("image/voice.png");
-        Image Wiki = new Image("image/wiki2.png");
-        /**
-         * Create Button
-         */
-        button1.setGraphic(imageSearch);
-        buttonDelete.setGraphic(imageDelete);
-        buttonAdd.setGraphic(imageAdd);
-        imageSearch.setImage(ImageSearch);
-        imageGoogle.setImage(googleTran);
-        imageDelete.setImage(ImageDelete);
-        imageWiki.setImage(Wiki);
-        imageAdd.setImage(ImageAdd);
-        imageGoogle.setImage(googleTran);
-        imageHistory.setImage(ImageHistory);
-        imageSpeaker.setImage(Speaker);
-        imageEdit.setImage(Edit);
-        buttonGoogle.setGraphic(imageGoogle);
-        historyButton.setGraphic(imageHistory);
-        editButton.setGraphic(imageEdit);
-        buttonSpeaker.setGraphic(imageSpeaker);
-        buttonWiki.setGraphic(imageWiki);
-        buttonWiki.setStyle("-fx-background-color:#00FFFF; -fx-box-shadow:40;");
-        buttonGoogle.setStyle("-fx-background-color:#00FFFF; -fx-box-shadow:40;");
-
-        /**
-         * Initalize Default ListView
-         */
-        myListView1.setEditable(true);
-        myListView1.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        /**
-
-
-        /**
-         *
-         */
-        myLabel1.setStyle("-fx-background-color:#219ecc; -fx-font-family:monospace");
-        myLabel2.setStyle("-fx-background-color:#219ecc; -fx-font-family:monospace");
-        searchTextField.setStyle("-fx-border-color:#219ecc;-fx-border-size:15");
-    }
-    public void createDictionaryLayout(ActionEvent event) throws Exception{
+    public void createGoogleTranslateLayout(){
+        FXMLLoader loadAddWord = new FXMLLoader();
+        loadAddWord.setLocation(getClass().getResource("GoogleTranslate.fxml"));
         try{
-            Parent dictionaryLayout = FXMLLoader.load(getClass().getResource("GoogleTranslate.fxml"));
-            Scene dictionaryView = new Scene(dictionaryLayout);
-            Stage Window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            Window.setScene(dictionaryView);
-            Window.show();
+            loadAddWord.load();
         }
-        catch(Exception e){
+        catch (Exception e){
             e.printStackTrace();
         }
+        Parent parent = loadAddWord.getRoot();
+        parent.getStylesheets().add("Css/dic.css");
+        Stage stage = new Stage();
+        stage.resizableProperty().setValue(false);
+        stage.setTitle("Google Dịch");
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
     public void addNewWord(String Word, String Defination){
         myDictionary.addWord(Word,Defination);
@@ -275,6 +229,9 @@ public class Controller implements Initializable {
             deleteWord(oldWord);
             addNewWord(newWord,newDefination);
         }
+    }
+    public void createWikipediaLayout(){
+
     }
     public void loadAddWordDialog(ActionEvent event){
 
@@ -358,34 +315,29 @@ public class Controller implements Initializable {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error ");
+            alert.setHeaderText(null);
+            alert.setContentText("No internet connection!");
+            alert.showAndWait();
+        }
     }
     public void historySearchWord(){
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Lịch Sử Tìm Kiếm");
-        window.setWidth(700);
-        window.setHeight(700);
-        ListView<String> historySearch = new ListView<String>();
-        historySearch.getItems().addAll(ReadRecentWordFormFile());
-        Button closeButton = new Button("Đóng");
-        closeButton.setOnAction(event -> window.close());
-        WebView wordDefination = new WebView();
-        historySearch.setOnMouseClicked(event -> {
-            try{
-                String Word = historySearch.getSelectionModel().getSelectedItem();
-                String Defination = myDictionary.getWordDefination(Word);
-                wordDefination.getEngine().loadContent(Defination);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        });
-        VBox layout = new VBox();
-        layout.getChildren().addAll(historySearch,closeButton,wordDefination);
-        layout.setAlignment(Pos.CENTER);
-        Scene newScene = new Scene(layout);
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loadHistoryWord = new FXMLLoader();
+        loadHistoryWord.setLocation(getClass().getResource("historyWordDialog.fxml"));
+        try{
+            loadHistoryWord.load();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        Parent parent = loadHistoryWord.getRoot();
+        Stage stage = new Stage();
+        stage.resizableProperty().setValue(false);
+        stage.setTitle("Lịch Sử Tìm Kiếm");
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
     public void loadDeleteWordDialog(){
         FXMLLoader loadAddWord = new FXMLLoader();
@@ -398,6 +350,7 @@ public class Controller implements Initializable {
         }
         Parent parent = loadAddWord.getRoot();
         Stage stage = new Stage();
+        stage.resizableProperty().setValue(false);
         stage.setTitle("XÓA TỪ");
         stage.setScene(new Scene(parent));
         stage.show();
@@ -413,6 +366,7 @@ public class Controller implements Initializable {
         }
         Parent parent = loadUpdateWord.getRoot();
         Stage stage = new Stage();
+        stage.resizableProperty().setValue(false);
         stage.setTitle("Chỉnh Sửa");
         stage.setScene(new Scene(parent));
         stage.show();
@@ -423,6 +377,7 @@ public class Controller implements Initializable {
         Temp.addAll(myDictionary.getListWordsFormDictionary());
         myListView1.setItems(Temp);
     }
+
     public Dictionary getDictionary(){
         return myDictionary;
     }

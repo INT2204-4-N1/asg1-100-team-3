@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -26,10 +27,13 @@ public class Main extends Application {
         FXMLLoader mloader= new FXMLLoader();
         mloader.setLocation(getClass().getResource("sample.fxml"));
         mloader.load();
-        loader= mloader;
+        loader = mloader;
         Parent root = loader.getRoot();
         primaryStage.setTitle("Dictionary");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        Scene scene = new Scene(root,1000,700);
+        scene.getStylesheets().add("css/dic.css");
+        primaryStage.setScene(scene);
+        primaryStage.resizableProperty().setValue(Boolean.FALSE);
         primaryStage.show();
     }
     public static void main(String[] args) {

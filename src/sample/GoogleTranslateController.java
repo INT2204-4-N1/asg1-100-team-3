@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javazoom.jl.decoder.JavaLayerException;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
 public class GoogleTranslateController implements Initializable {
     private HashMap<String,String> map = new HashMap<>();
     Language language = new Language();
+    @FXML private AnchorPane ggAnchorPanel = new AnchorPane();
     @FXML private Button closeButton = new Button();
     @FXML private ComboBox<String> srcLang = new ComboBox<String>();
     @FXML private ComboBox<String> desLang = new ComboBox<String>();
@@ -34,7 +36,6 @@ public class GoogleTranslateController implements Initializable {
     @FXML private TextArea inputText = new TextArea();
     @FXML private TextArea outputText = new TextArea();
     @FXML private Button speakButton = new Button();
-    @FXML private Controller controller = new Controller();
     public void initialize(URL url , ResourceBundle rb){
             map.put("Vietnamese","vi");
             map.put("English","en");
@@ -48,21 +49,6 @@ public class GoogleTranslateController implements Initializable {
             desLang.setValue("Vietnamese");
             srcLang.setValue("English");
         }
-        public void createDictionaryLayout(ActionEvent event) throws Exception{
-            if(event.getSource()==closeButton){
-            try{
-                Parent mainLayout = Main.getLoader().load(getClass().getResource("sample.fxml"));
-                Scene mainView = new Scene(mainLayout);
-                Stage Window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                Window.setScene(mainView);
-                Window.show();
-            }
-            catch(Exception e){
-
-                e.printStackTrace();
-                }
-            }
-        }
         public void pressButton(ActionEvent e){
             if(e.getSource()==tranButton){
                translateText();
@@ -74,6 +60,10 @@ public class GoogleTranslateController implements Initializable {
                 catch (Exception ev){
                     ev.printStackTrace();
                 }
+            }
+            else if(e.getSource() == closeButton){
+                Stage stage = (Stage)closeButton.getScene().getWindow();
+                stage.close();
             }
         }
         public void pressKeyBoard(){
@@ -115,6 +105,13 @@ public class GoogleTranslateController implements Initializable {
                 } catch (JavaLayerException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+            else if(!IsConnected.IsConnecting()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error ");
+                alert.setHeaderText(null);
+                alert.setContentText("No internet connection!");
+                alert.showAndWait();
             }
         }
 }
