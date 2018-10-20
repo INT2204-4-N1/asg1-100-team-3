@@ -42,7 +42,6 @@
 #historyButton:hover{
     -fx-background-color: #00FF00;
     -fx-text-fill: blue;
-    -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
 }
 #buttonWiki:hover{
     -fx-background-color:  #00FF00;
@@ -154,4 +153,31 @@
     -fx-background-color: #fff;
     -fx-text-fill: blue;
     -fx-effect: dropshadow( three-pass-box, #d1d1d1, 5, 0, 2, 5 );
+}
+#wikiSearch{
+    -fx-background-color: none;
+    -fx-background-radius: 40px;
+}
+#wikiSearch:hover{
+    -fx-fill: #fff;
+    -fx-background-color: #E0FFFF;
+    -fx-border-color: #E0FFFF;
+}
+#wikiTextfield{
+    -fx-background-radius: 40px;
+    -fx-font-size: 20px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill:#20B2AA ;
+}
+#wikiAnchorPanel{
+    -fx-background-color: 	#ADD8E6;
+}
+#historyAnchorPanel{
+    -fx-background-color: #B0E0E6;
+}
+#historySearch{
+    -fx-background-color: none;
+    -fx-font-family: "TUV";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }

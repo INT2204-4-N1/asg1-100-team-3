@@ -14,11 +14,6 @@
 
 <AnchorPane fx:id="myAnchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <ImageView fitHeight="353.0" fitWidth="914.0" layoutX="637.0" layoutY="-194.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/banner2.jpg" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="156.0" fitWidth="761.0" layoutX="215.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/banner2.jpg" />
@@ -99,7 +94,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonWiki" mnemonicParsing="false" prefHeight="76.0" prefWidth="210.0" text="  Wikipedia">
+            <Button fx:id="buttonWiki" mnemonicParsing="false" onAction="#pressButton" prefHeight="76.0" prefWidth="210.0" text="  Wikipedia">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                      <image>

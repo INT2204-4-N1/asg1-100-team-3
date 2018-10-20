@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -18,7 +19,7 @@ public class historyController implements Initializable {
     @FXML private ListView<String> historySearch = new ListView<String>();
     @FXML private Button closeButton = new Button("Đóng");
     @FXML private WebView wordDefination = new WebView();
-    @FXML private Button deleteHistory = new Button();
+    @FXML private AnchorPane historyAnchorPanel = new AnchorPane();
     private Controller controller = Main.getLoader().getController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {

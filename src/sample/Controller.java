@@ -87,6 +87,9 @@ public class Controller implements Initializable {
         else if(e.getSource()==historyButton){
             historySearchWord();
         }
+        else if(e.getSource()==buttonWiki){
+            createWikipediaLayout();
+        }
     }
     public void pressKeybroad(){
         searchTextField.setOnKeyPressed(event -> {
@@ -231,7 +234,21 @@ public class Controller implements Initializable {
         }
     }
     public void createWikipediaLayout(){
-
+        FXMLLoader loadAddWord = new FXMLLoader();
+        loadAddWord.setLocation(getClass().getResource("wikipediaDialog.fxml"));
+        try{
+            loadAddWord.load();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        Parent parent = loadAddWord.getRoot();
+        parent.getStylesheets().add("Css/dic.css");
+        Stage stage = new Stage();
+        stage.resizableProperty().setValue(false);
+        stage.setTitle("Wikipedia");
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
     public void loadAddWordDialog(ActionEvent event){
 
@@ -333,6 +350,7 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
         Parent parent = loadHistoryWord.getRoot();
+        parent.getStylesheets().add("css/dic.css");
         Stage stage = new Stage();
         stage.resizableProperty().setValue(false);
         stage.setTitle("Lịch Sử Tìm Kiếm");
