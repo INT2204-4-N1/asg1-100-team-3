@@ -31,7 +31,7 @@ public class Main extends Application {
         Parent root = loader.getRoot();
         primaryStage.setTitle("Dictionary");
         Scene scene = new Scene(root,1000,700);
-        scene.getStylesheets().add("css/dic.css");
+        scene.getStylesheets().add("Css/dic.css");
         primaryStage.setScene(scene);
         primaryStage.resizableProperty().setValue(Boolean.FALSE);
         primaryStage.show();

@@ -350,7 +350,7 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
         Parent parent = loadHistoryWord.getRoot();
-        parent.getStylesheets().add("css/dic.css");
+        parent.getStylesheets().add("Css/dic.css");
         Stage stage = new Stage();
         stage.resizableProperty().setValue(false);
         stage.setTitle("Lịch Sử Tìm Kiếm");

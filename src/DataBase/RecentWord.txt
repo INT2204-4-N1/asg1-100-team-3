@@ -996,3 +996,8 @@ perspicacity
 snaffle
 stiffening
 stiffening
+descriptor
+bucket piston
+anamorphosis
+FLOPS (floating-point operations per second)
+descriptor
