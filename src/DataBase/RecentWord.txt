@@ -1001,3 +1001,4 @@ bucket piston
 anamorphosis
 FLOPS (floating-point operations per second)
 descriptor
+FLOPS (floating-point operations per second)

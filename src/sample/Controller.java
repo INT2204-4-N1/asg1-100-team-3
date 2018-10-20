@@ -332,6 +332,9 @@ public class Controller implements Initializable {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else if(getSelectingWordOnListView()==null && searchTextField.getText().equals("")){
+            createAlertBoxes();
+        }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error ");
