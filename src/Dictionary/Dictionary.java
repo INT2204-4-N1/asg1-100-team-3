@@ -6,19 +6,21 @@ import sample.Controller;
 import sample.Main;
 
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 public class Dictionary {
     private ArrayList<String> list = new ArrayList<String>();
     private HashMap<String,String> dictionary = new HashMap<String,String>();
     private SQLiteDataBase sqlData = new SQLiteDataBase();
     private Controller controller = Main.getLoader().getController();
     public ArrayList<String> getListWordsFormDictionary(){
-        ArrayList<String> Temp = new ArrayList<String>();
+        ArrayList<String> Temp = new ArrayList<>();
         for(Map.Entry<String,String> entry : dictionary.entrySet()){
             Temp.add(entry.getKey());
         }
+        Collections.sort(Temp);
+        List<String> temp = Temp.subList(1,33);
+        Temp.removeAll(temp);
         return Temp;
     }
     public void readDataFormSQLFile(){

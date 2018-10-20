@@ -76,7 +76,7 @@
       </HBox>
       <VBox fx:id="myVBox" alignment="TOP_CENTER" prefHeight="716.0" prefWidth="198.0">
          <children>
-            <Button fx:id="buttonDic" mnemonicParsing="false" prefHeight="65.0" prefWidth="199.0" text=" Dictionary">
+            <Button fx:id="buttonDic" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="65.0" prefWidth="199.0" text=" Dictionary">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -85,16 +85,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonGoogle" mnemonicParsing="false" onAction="#pressButton" prefHeight="72.0" prefWidth="199.0" text="  Google Translate">
+            <Button fx:id="buttonGoogle" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#pressButton" prefHeight="72.0" prefWidth="199.0" text=" Google Translate">
                <graphic>
-                  <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="51.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/google1.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonWiki" mnemonicParsing="false" onAction="#pressButton" prefHeight="76.0" prefWidth="210.0" text="  Wikipedia">
+            <Button fx:id="buttonWiki" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#pressButton" prefHeight="76.0" prefWidth="210.0" text="  Wikipedia">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,7 +102,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="historyButton" mnemonicParsing="false" onAction="#historySearchWord" prefHeight="81.0" prefWidth="198.0" text="  History">
+            <Button fx:id="historyButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#historySearchWord" prefHeight="81.0" prefWidth="198.0" text="  History">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
