@@ -1,5 +1,6 @@
 package uet.oop.bomberman;
 
+import uet.oop.bomberman.Sound.Audio;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.gui.Frame;
 import uet.oop.bomberman.input.Keyboard;
@@ -20,7 +21,7 @@ public class Game extends Canvas {
 							HEIGHT = 13 * TILES_SIZE;
 
 	public static int SCALE = 3;
-	
+	public Audio sound;
 	public static final String TITLE = "BombermanGame";
 	
 	private static final int BOMBRATE = 1;
@@ -59,6 +60,7 @@ public class Game extends Canvas {
 		
 		_board = new Board(this, _input, screen);
 		addKeyListener(_input);
+		sound = new Audio();
 	}
 	
 	
@@ -110,13 +112,14 @@ public class Game extends Canvas {
 	
 	public void start() {
 		_running = true;
-		
+		sound.BackgroundSound();
 		long  lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second
 		double delta = 0;
 		int frames = 0;
 		int updates = 0;
+
 		requestFocus();
 		while(_running) {
 			long now = System.nanoTime();

@@ -101,6 +101,11 @@ public abstract class Enemy extends Character {
 		}
 	}
 
+	/**
+	 * phương thức di chuyển tới vị trí mới
+	 * @param xa giá trị denta hoành đọ vị trí cữ mà vị trí mới
+	 * @param ya giá trị denta tung độ giữa vị trí cũ và vị trí mới
+	 */
 	@Override
 	public void move(double xa, double ya) {
 		if(!_alive) return;
@@ -108,26 +113,31 @@ public abstract class Enemy extends Character {
 		_x += xa;
 	}
 
+	/**
+	 * phương thức kiểm tra xem có thể di chuyển tới vị trí mới hay không
+	 * @param x	hoành độ của vị trí mới
+	 * @param y tung độ của vi trí mới
+	 * @return true nếu có thể đi tới vị trí mới và false nếu không
+	 */
 	@Override
 	public boolean canMove(double x, double y) {
 		// TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-		double xr = _x, yr = _y - 16; //subtract y to get more accurate results
-
-		//the thing is, subract 15 to 16 (sprite size), so if we add 1 tile we get the next pixel tile with this
-		//we avoid the shaking inside tiles with the help of steps
-		if(_direction == 0) { yr += _sprite.getSize() -1 ; xr += _sprite.getSize()/2; }
-		if(_direction == 1) {yr += _sprite.getSize()/2; xr += 1;}
-		if(_direction == 2) { xr += _sprite.getSize()/2; yr += 1;}
-		if(_direction == 3) { xr += _sprite.getSize() -1; yr += _sprite.getSize()/2;}
-
-		int xx = Coordinates.pixelToTile(xr) +(int)x;
-		int yy = Coordinates.pixelToTile(yr) +(int)y;
-
-		Entity a = _board.getEntity(xx, yy, this); //entity of the position we want to go
-
+		double xEnemy = _x, yEnemy = _y - 16;
+		if(_direction == 0) {yEnemy  += _sprite.getSize() -1 ; xEnemy += _sprite.getSize()/2; }
+		if(_direction == 1) {yEnemy  += _sprite.getSize()/2; xEnemy+= 1;}
+		if(_direction == 2) { xEnemy += _sprite.getSize()/2; yEnemy += 1;}
+		if(_direction == 3) { xEnemy += _sprite.getSize() -1; yEnemy  += _sprite.getSize()/2;}
+		int xx = Coordinates.pixelToTile(xEnemy ) +(int)x;
+		int yy = Coordinates.pixelToTile(yEnemy ) +(int)y;
+		Entity a = _board.getEntity(xx, yy, this);
 		return a.collide(this);
 	}
 
+	/**
+	 * phương thức kiểm tra và chạm giữa Enemy và các thực thể khác
+	 * @param e thực thể cần được kiểm tra
+	 * @return
+	 */
 	@Override
 	public boolean collide(Entity e) {
 		// TODO: xử lý va chạm với Flame

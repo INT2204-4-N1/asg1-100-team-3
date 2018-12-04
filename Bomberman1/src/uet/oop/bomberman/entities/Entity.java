@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import uet.oop.bomberman.Sound.Audio;
 import uet.oop.bomberman.graphics.IRender;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
@@ -13,7 +14,7 @@ public abstract class Entity implements IRender {
 	protected double _x, _y;
 	protected boolean _removed = false;
 	protected Sprite _sprite;
-
+	protected Audio Sound;
 	/**
 	 * Phương thức này được gọi liên tục trong vòng lặp game,
 	 * mục đích để xử lý sự kiện và cập nhật trạng thái Entity
@@ -48,14 +49,16 @@ public abstract class Entity implements IRender {
 	public abstract boolean collide(Entity e);
 	
 	public double getX() {
-		return _x;
+		return _x ;
 	}
 	
 	public double getY() {
-		return _y;
+
+		return _y ;
 	}
 	
 	public int getXTile() {
+
 		return Coordinates.pixelToTile(_x + _sprite.SIZE / 2);
 	}
 	

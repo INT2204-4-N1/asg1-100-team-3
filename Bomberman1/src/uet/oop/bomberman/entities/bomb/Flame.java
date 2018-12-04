@@ -33,7 +33,8 @@ public class Flame extends Entity {
 	}
 
 	/**
-	 * Tạo các FlameSegment, mỗi segment ứng một đơn vị độ dài
+	 * phương thức tạm ra các Flame Segments cho Flme
+	 *
 	 */
 	private void createFlameSegments() {
 		// TODO: tạo các segment dưới đây
@@ -79,9 +80,9 @@ public class Flame extends Entity {
 
 			Entity a = _board.getEntity(x, y, null);
 
-			if(a instanceof Bomber) ++radius; //explosion has to be below the mob
+			if(a instanceof Bomber) ++radius;
 
-			if(a.collide(this) == false) //cannot pass thru
+			if(a!= null && a.collide(this) == false)
 				break;
 
 			++radius;
@@ -110,6 +111,12 @@ public class Flame extends Entity {
 	@Override
 	public boolean collide(Entity e) {
 		// TODO: xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
+		if(e instanceof Bomber){
+			((Bomber) e).kill();
+		}
+		else if(e instanceof Enemy){
+			((Enemy) e).kill();
+		}
 		return true;
 	}
 }

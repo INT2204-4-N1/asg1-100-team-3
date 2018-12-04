@@ -1,6 +1,5 @@
 
 		package uet.oop.bomberman;
-
 		import uet.oop.bomberman.entities.Entity;
 		import uet.oop.bomberman.entities.Message;
 		import uet.oop.bomberman.entities.bomb.Bomb;
@@ -13,7 +12,6 @@
 		import uet.oop.bomberman.input.Keyboard;
 		import uet.oop.bomberman.level.FileLevelLoader;
 		import uet.oop.bomberman.level.LevelLoader;
-
 		import java.awt.*;
 		import java.io.IOException;
 		import java.util.ArrayList;
@@ -24,6 +22,7 @@
  * Quản lý thao tác điều khiển, load level, render các màn hình của game
  */
 public class Board implements IRender {
+	final int MAX_LEVEL = 2; //max levl game
 	protected LevelLoader _levelLoader;
 	protected Game _game;
 	protected Keyboard _input;
@@ -49,7 +48,7 @@ public class Board implements IRender {
 
 	@Override
 	public void update() {
-		if( _game.isPaused() ) return;
+		if (_game.isPaused()) return;
 
 		updateEntities();
 		updateCharacters();
@@ -59,13 +58,13 @@ public class Board implements IRender {
 
 		for (int i = 0; i < _characters.size(); i++) {
 			Character a = _characters.get(i);
-			if(a.isRemoved()) _characters.remove(i);
+			if (a.isRemoved()) _characters.remove(i);
 		}
 	}
 
 	@Override
 	public void render(Screen screen) {
-		if( _game.isPaused() ) return;
+		if (_game.isPaused()) return;
 
 		//only render the visible part of screen
 		int x0 = Screen.xOffset >> 4; //tile precision, -> left X
@@ -85,10 +84,16 @@ public class Board implements IRender {
 	}
 
 	public void nextLevel() {
+		System.out.println(_levelLoader.getLevel());
 		loadLevel(_levelLoader.getLevel() + 1);
 	}
 
 	public void loadLevel(int level) {
+		if (level > MAX_LEVEL) { // max level game
+			endGame();
+			return;
+		}
+		System.out.println(level);
 		_time = Game.TIME;
 		_screenToShow = 2;
 		_game.resetScreenDelay();
@@ -99,18 +104,19 @@ public class Board implements IRender {
 
 		try {
 			_levelLoader = new FileLevelLoader(this, level);
+			_levelLoader.loadLevel(level);
 			_entities = new Entity[_levelLoader.getHeight() * _levelLoader.getWidth()];
 
 			_levelLoader.createEntities();
-		} catch (LoadLevelException e) {
-			endGame();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LoadLevelException e) {
 			e.printStackTrace();
 		}
 	}
 
 	protected void detectEndGame() {
-		if(_time <= 0)
+		if (_time <= 0)
 			endGame();
 	}
 
@@ -123,7 +129,7 @@ public class Board implements IRender {
 	public boolean detectNoEnemies() {
 		int total = 0;
 		for (int i = 0; i < _characters.size(); i++) {
-			if(_characters.get(i) instanceof Bomber == false)
+			if (_characters.get(i) instanceof Bomber == false)
 				++total;
 		}
 
@@ -148,16 +154,16 @@ public class Board implements IRender {
 
 		Entity res = null;
 
-		res = getFlameSegmentAt((int)x, (int)y);
-		if( res != null) return res;
+		res = getFlameSegmentAt((int) x, (int) y);
+		if (res != null) return res;
 
 		res = getBombAt(x, y);
-		if( res != null) return res;
+		if (res != null) return res;
 
 		res = getCharacterAtExcluding(x, y);
-		if( res != null) return res;
+		if (res != null) return res;
 
-		res = getEntityAt((int)x, (int)y);
+		res = getEntityAt((int) x, (int) y);
 
 		return res;
 	}
@@ -169,9 +175,9 @@ public class Board implements IRender {
 	public Bomb getBombAt(double x, double y) {
 		Iterator<Bomb> bs = _bombs.iterator();
 		Bomb b;
-		while(bs.hasNext()) {
+		while (bs.hasNext()) {
 			b = bs.next();
-			if(b.getX() == (int)x && b.getY() == (int)y)
+			if (b.getX() == (int) x && b.getY() == (int) y)
 				return b;
 		}
 
@@ -182,10 +188,10 @@ public class Board implements IRender {
 		Iterator<Character> itr = _characters.iterator();
 
 		Character cur;
-		while(itr.hasNext()) {
+		while (itr.hasNext()) {
 			cur = itr.next();
 
-			if(cur instanceof Bomber)
+			if (cur instanceof Bomber)
 				return (Bomber) cur;
 		}
 
@@ -196,12 +202,12 @@ public class Board implements IRender {
 		Iterator<Character> itr = _characters.iterator();
 
 		Character cur;
-		while(itr.hasNext()) {
+		while (itr.hasNext()) {
 			cur = itr.next();
 			/*if(cur == a) {
 				continue;
 			}*/
-			if(cur.getXTile() == x && cur.getYTile() == y) {
+			if (cur.getXTile() == x && cur.getYTile() == y) {
 				return cur;
 			}
 
@@ -213,11 +219,11 @@ public class Board implements IRender {
 	public FlameSegment getFlameSegmentAt(int x, int y) {
 		Iterator<Bomb> bs = _bombs.iterator();
 		Bomb b;
-		while(bs.hasNext()) {
+		while (bs.hasNext()) {
 			b = bs.next();
 
 			FlameSegment e = b.flameAt(x, y);
-			if(e != null) {
+			if (e != null) {
 				return e;
 			}
 		}
@@ -226,7 +232,7 @@ public class Board implements IRender {
 	}
 
 	public Entity getEntityAt(double x, double y) {
-		return _entities[(int)x + (int)y * _levelLoader.getWidth()];
+		return _entities[(int) x + (int) y * _levelLoader.getWidth()];
 	}
 
 	public void addEntity(int pos, Entity e) {
@@ -248,14 +254,14 @@ public class Board implements IRender {
 	protected void renderCharacter(Screen screen) {
 		Iterator<Character> itr = _characters.iterator();
 
-		while(itr.hasNext())
+		while (itr.hasNext())
 			itr.next().render(screen);
 	}
 
 	protected void renderBombs(Screen screen) {
 		Iterator<Bomb> itr = _bombs.iterator();
 
-		while(itr.hasNext())
+		while (itr.hasNext())
 			itr.next().render(screen);
 	}
 
@@ -266,42 +272,42 @@ public class Board implements IRender {
 
 			g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
 			g.setColor(m.getColor());
-			g.drawString(m.getMessage(), (int)m.getX() - Screen.xOffset  * Game.SCALE, (int)m.getY());
+			g.drawString(m.getMessage(), (int) m.getX() - Screen.xOffset * Game.SCALE, (int) m.getY());
 		}
 	}
 
 	protected void updateEntities() {
-		if( _game.isPaused() ) return;
+		if (_game.isPaused()) return;
 		for (int i = 0; i < _entities.length; i++) {
 			_entities[i].update();
 		}
 	}
 
 	protected void updateCharacters() {
-		if( _game.isPaused() ) return;
+		if (_game.isPaused()) return;
 		Iterator<Character> itr = _characters.iterator();
 
-		while(itr.hasNext() && !_game.isPaused())
+		while (itr.hasNext() && !_game.isPaused())
 			itr.next().update();
 	}
 
 	protected void updateBombs() {
-		if( _game.isPaused() ) return;
+		if (_game.isPaused()) return;
 		Iterator<Bomb> itr = _bombs.iterator();
 
-		while(itr.hasNext())
+		while (itr.hasNext())
 			itr.next().update();
 	}
 
 	protected void updateMessages() {
-		if( _game.isPaused() ) return;
+		if (_game.isPaused()) return;
 		Message m;
 		int left;
 		for (int i = 0; i < _messages.size(); i++) {
 			m = _messages.get(i);
 			left = m.getDuration();
 
-			if(left > 0)
+			if (left > 0)
 				m.setDuration(--left);
 			else
 				_messages.remove(i);
@@ -309,7 +315,7 @@ public class Board implements IRender {
 	}
 
 	public int subtractTime() {
-		if(_game.isPaused())
+		if (_game.isPaused())
 			return this._time;
 		else
 			return this._time--;
@@ -354,7 +360,5 @@ public class Board implements IRender {
 	public int getHeight() {
 		return _levelLoader.getHeight();
 	}
-	public LevelLoader getFile(){
-		return this._levelLoader;
-	}
+
 }

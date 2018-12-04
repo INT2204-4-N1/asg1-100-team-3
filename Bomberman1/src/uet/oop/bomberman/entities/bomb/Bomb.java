@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.Sound.Audio;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
@@ -11,6 +12,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
 
 public class Bomb extends AnimatedEntitiy {
+
 
 	protected double _timeToExplode = 120; //2 seconds
 	public int _timeAfter = 20;
@@ -30,6 +32,7 @@ public class Bomb extends AnimatedEntitiy {
 		_y = y;
 		_board = board;
 		_sprite = Sprite.bomb;
+		this.Sound = new Audio();
 	}
 
 	/**
@@ -98,10 +101,10 @@ public class Bomb extends AnimatedEntitiy {
 	 * nếu có nhân vật nào(Bomber,Enemy) đang ở vị trí hiện tại thì nhân vật đó sẽ bị chết
 	 * tạo các Flame cho quả bom với thông tin gồm bán kính nổ, tọa độ,v...v
      */
-	protected void explode() {
+    public void explode() {
 		_allowedToPassThru = true;
 		_exploded = true;
-
+		this.Sound.Explosion();
 		Character a = _board.getCharacterAtExcluding(_x, _y);
 		if(a != null)  {
 			a.kill();

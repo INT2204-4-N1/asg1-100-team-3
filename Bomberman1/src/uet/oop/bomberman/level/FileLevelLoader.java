@@ -35,23 +35,24 @@ public class FileLevelLoader extends LevelLoader {
 		super(board, level);
 	}
 
+	/**
+	 * phương thức đọc dữ liệu từ file cấu hình của trò chơi
+	 * @param level	màn chơi hiện tại
+	 * @throws IOException nếu độc file thất bại sẽ ném ra ngoại lệ IO
+	 */
 	@Override
 	public void loadLevel(int level) throws IOException {
 		// TODO: đọc dữ liệu từ tệp cấu hình /levels/Level{level}.txt
 		// TODO: cập nhật các giá trị đọc được vào _width, _height, _level, _map
-		level = 4;
-		String path = "levels/Level"+level+".txt";
-		URL absPath = FileLevelLoader.class.getResource("/" + path);
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(absPath.openStream()));
-
+		level = 2;
+		String mapPath = "res/levels/Level"+level+".txt";
+		BufferedReader in = new BufferedReader(new FileReader(mapPath));
 		String data = in.readLine();
-		StringTokenizer tokens = new StringTokenizer(data);
-
-		_level = Integer.parseInt(tokens.nextToken());
-		_height = Integer.parseInt(tokens.nextToken());
-		_width = Integer.parseInt(tokens.nextToken());
-
+		data = data.trim();
+		String Arr[] = data.split(" ");
+		_level = Integer.parseInt(Arr[0]);
+		_height = Integer.parseInt(Arr[1]);
+		_width = Integer.parseInt(Arr[2]);
 		char[][] map = new char[_height][_width];
 		for (int x = 0; x < _height; x++) {
 			data = in.readLine();
@@ -63,6 +64,13 @@ public class FileLevelLoader extends LevelLoader {
 		_map = map;
 	}
 
+	/**
+	 * phương thức khởi tạo bản đồ từ tệp cấu hình
+	 * thuộc tính _broad có chứa một mảng các Entity( thực thể ) dựa vào tệp cấu hình ta khởi tạo các thực thể
+	 * đó theo tọa độ trên bản đồ (x,y). chuyển từ tọa độ trên ma trận thành tọa độ trên mảng một chiều bằng công thức
+	 * pos = x + y*width
+	 * rồi khởi tạo bằng phương thức addEntity trong lớp Broad.
+	 */
 	@Override
 	public void createEntities() {
 		// TODO: tạo các Entity của màn chơi
@@ -87,11 +95,10 @@ public class FileLevelLoader extends LevelLoader {
 						_board.addEntity(x + y * _width,
 								new LayeredEntity(x, y,
 										new Grass(x, y, Sprite.grass),
-										new Portal(x, y, Sprite.portal),
+										new Portal(x, y, Sprite.portal, _board),
 										new Brick(x, y, Sprite.brick)
 								)
 						);
-
 						break;
 					case 'p':
 						_board.addCharacter(new Bomber(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
